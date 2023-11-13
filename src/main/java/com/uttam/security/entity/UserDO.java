@@ -19,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,8 +28,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class User implements UserDetails{
+@Builder
+public class UserDO implements UserDetails{
 	/**
 	 * 
 	 */
@@ -52,9 +53,7 @@ public class User implements UserDetails{
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	
-	@Column(name="is_locked")
-	private Boolean isLocked;
+
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -74,17 +73,17 @@ public class User implements UserDetails{
 	@Override
 	public boolean isAccountNonLocked() {
 		
-		return isLocked;
+		return true;
 	}
 	
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return true;
 	}
 	
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
 	
 }
